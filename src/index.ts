@@ -2,16 +2,16 @@ import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import authRoutes from './routes/auth';
-
+var cors = require('cors')
 dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
+app.use(cors())
 app.use(express.json());
 mongoose.connect(process.env.MONGO_URI as string)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error(err));
-
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello, World!');

@@ -61,10 +61,7 @@ router.post('/register', [
   }
 });
 
-router.post('/login', [
-  check('email', 'Please include a valid email').isEmail(),
-  check('password', 'Password is required').exists()
-], async (req: Request, res: Response) => {
+router.post('/login', async (req: Request, res: Response) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
