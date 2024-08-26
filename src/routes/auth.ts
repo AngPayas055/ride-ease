@@ -86,10 +86,14 @@ router.post('/login', async (req: Request, res: Response) => {
               role: user.role
           }
       };
-
       const token = jwt.sign(payload, process.env.JWT_SECRET as string, { expiresIn: '1h' });
-
-      res.json({ token });
+      const userData = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        token
+      }
+      res.json({ userData });
   } catch (err) {
     if (err instanceof Error) {
         console.error(err.message);
